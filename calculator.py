@@ -3,8 +3,12 @@ from tkinter import *
 def btn_click(value):
     content = display_var.get()
     if value == "=":
-        pass
-    if value == "C":
+        try:
+            result = str(eval(content))
+            display_var.set(result)
+        except Exception as e:
+            display_var.set("Error")
+    elif value == "C":
         display_var.set("")
     else:
         display_var.set(content + value)
@@ -12,10 +16,12 @@ def btn_click(value):
 root = Tk()
 root.title("Calculator")
 root.geometry("300x400")
+root.minsize(250, 300)
+root.maxsize(450, 550)
 root.configure(bg="#2E2E2E")
 
 display_var = StringVar()
-display_entry = Entry(root, textvariable=display_var, font=("Arial", 24), bg="black", fg="white", borderwidth=0, justify=RIGHT)
+display_entry = Entry(root, textvariable=display_var, font=("Arial", 30), bg="black", fg="white", borderwidth=0, justify=RIGHT)
 display_entry.pack(padx=4, pady=5, fill=BOTH)
 
 button_frame = Frame(root, bg="#2E2E2E")
